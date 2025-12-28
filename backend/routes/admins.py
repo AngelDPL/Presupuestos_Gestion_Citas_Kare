@@ -7,8 +7,9 @@ from models import db, Admins
 admins_bp = Blueprint('admins', __name__, url_prefix='/api/admins')
 
 
-
+# ============================================================================
 # DECORADOR PERSONALIZADO - Verificar que es Admin
+# ============================================================================
 
 def admin_required(fn):
     """Decorador que verifica que el usuario sea un Admin"""
@@ -28,8 +29,9 @@ def admin_required(fn):
     return wrapper
 
 
-
+# ============================================================================
 # POST - Crear el primer administrador (sin autenticación)
+# ============================================================================
 
 @admins_bp.route('/setup', methods=['POST'])
 def setup_first_admin():
@@ -74,8 +76,9 @@ def setup_first_admin():
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # POST - Login de administrador (obtener token JWT)
+# ============================================================================
 
 @admins_bp.route('/login', methods=['POST'])
 def login_admin():
@@ -114,8 +117,9 @@ def login_admin():
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # GET - Obtener todos los administradores (requiere autenticación)
+# ============================================================================
 
 @admins_bp.route('', methods=['GET'])
 @admin_required
@@ -132,8 +136,9 @@ def get_all_admins():
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # GET - Obtener un administrador por ID (requiere autenticación)
+# ============================================================================
 
 @admins_bp.route('/<int:admin_id>', methods=['GET'])
 @admin_required
@@ -152,8 +157,9 @@ def get_admin(admin_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # POST - Crear un nuevo administrador (requiere autenticación)
+# ============================================================================
 
 @admins_bp.route('', methods=['POST'])
 @admin_required
@@ -197,8 +203,9 @@ def create_admin():
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # PUT - Actualizar un administrador (requiere autenticación)
+# ============================================================================
 
 @admins_bp.route('/<int:admin_id>', methods=['PUT'])
 @admin_required
@@ -246,8 +253,9 @@ def update_admin(admin_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # DELETE - Eliminar un administrador (requiere autenticación)
+# ============================================================================
 
 @admins_bp.route('/<int:admin_id>', methods=['DELETE'])
 @admin_required
