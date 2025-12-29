@@ -7,8 +7,9 @@ from models import db, Users, Businesses, Admins
 users_bp = Blueprint('users', __name__, url_prefix='/api/users')
 
 
-
+# ============================================================================
 # DECORADOR PERSONALIZADO - Verificar que es Admin
+# ============================================================================
 
 def admin_required(fn):
     """Decorador que verifica que el usuario sea un Admin"""
@@ -53,8 +54,9 @@ def user_or_admin_required(fn):
     return wrapper
 
 
-
+# ============================================================================
 # GET - Obtener todos los usuarios (requiere autenticación admin)
+# ============================================================================
 
 @users_bp.route('', methods=['GET'])
 @admin_required
@@ -71,8 +73,9 @@ def get_all_users():
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # GET - Obtener usuarios por negocio (requiere autenticación admin)
+# ============================================================================
 
 @users_bp.route('/business/<int:business_id>', methods=['GET'])
 @admin_required
@@ -94,8 +97,9 @@ def get_users_by_business(business_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # GET - Obtener un usuario por ID (requiere autenticación)
+# ============================================================================
 
 @users_bp.route('/<int:user_id>', methods=['GET'])
 @user_or_admin_required
@@ -114,8 +118,9 @@ def get_user(user_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # POST - Crear un nuevo usuario (requiere autenticación admin)
+# ============================================================================
 
 @users_bp.route('', methods=['POST'])
 @admin_required
@@ -183,8 +188,9 @@ def create_user():
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # PUT - Actualizar un usuario (requiere autenticación)
+# ============================================================================
 
 @users_bp.route('/<int:user_id>', methods=['PUT'])
 @user_or_admin_required
@@ -256,8 +262,9 @@ def update_user(user_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # DELETE - Eliminar un usuario (requiere autenticación admin)
+# ============================================================================
 
 @users_bp.route('/<int:user_id>', methods=['DELETE'])
 @admin_required
@@ -282,8 +289,9 @@ def delete_user(user_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # POST - Login de usuario
+# ============================================================================
 
 @users_bp.route('/login', methods=['POST'])
 def login_user():
@@ -323,8 +331,9 @@ def login_user():
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # POST - Verificar respuesta de seguridad (para recuperación de contraseña)
+# ============================================================================
 
 @users_bp.route('/verify-security/<int:user_id>', methods=['POST'])
 def verify_security_answer(user_id):
@@ -361,8 +370,9 @@ def verify_security_answer(user_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # PUT - Cambiar contraseña (requiere autenticación)
+# ============================================================================
 
 @users_bp.route('/<int:user_id>/change-password', methods=['PUT'])
 @user_or_admin_required

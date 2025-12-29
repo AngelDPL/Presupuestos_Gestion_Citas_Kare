@@ -7,8 +7,9 @@ from models import db, Businesses, Admins
 businesses_bp = Blueprint('businesses', __name__, url_prefix='/api/businesses')
 
 
-
+# ============================================================================
 # DECORADOR PERSONALIZADO - Verificar que es Admin
+# ============================================================================
 
 def admin_required(fn):
     """Decorador que verifica que el usuario sea un Admin"""
@@ -28,8 +29,9 @@ def admin_required(fn):
     return wrapper
 
 
-
+# ============================================================================
 # GET - Obtener todos los negocios (requiere autenticación)
+# ============================================================================
 
 @businesses_bp.route('', methods=['GET'])
 @admin_required
@@ -46,8 +48,9 @@ def get_all_businesses():
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # GET - Obtener un negocio por ID (requiere autenticación)
+# ============================================================================
 
 @businesses_bp.route('/<int:business_id>', methods=['GET'])
 @admin_required
@@ -66,8 +69,9 @@ def get_business(business_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # POST - Crear un nuevo negocio (requiere autenticación)
+# ============================================================================
 
 @businesses_bp.route('', methods=['POST'])
 @admin_required
@@ -113,8 +117,9 @@ def create_business():
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # PUT - Actualizar un negocio (requiere autenticación)
+# ============================================================================
 
 @businesses_bp.route('/<int:business_id>', methods=['PUT'])
 @admin_required
@@ -166,8 +171,9 @@ def update_business(business_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # DELETE - Eliminar un negocio (requiere autenticación)
+# ============================================================================
 
 @businesses_bp.route('/<int:business_id>', methods=['DELETE'])
 @admin_required
@@ -193,8 +199,9 @@ def delete_business(business_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # GET - Estadísticas de un negocio (requiere autenticación)
+# ============================================================================
 
 @businesses_bp.route('/<int:business_id>/stats', methods=['GET'])
 @admin_required

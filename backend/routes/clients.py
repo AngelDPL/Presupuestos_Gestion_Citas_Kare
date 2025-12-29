@@ -7,8 +7,9 @@ from models import db, Clients, Businesses, Users, Admins
 clients_bp = Blueprint('clients', __name__, url_prefix='/api/clients')
 
 
-
+# ============================================================================
 # DECORADOR PERSONALIZADO - Verificar que es Admin
+# ============================================================================
 
 def admin_required(fn):
     """Decorador que verifica que el usuario sea un Admin"""
@@ -53,8 +54,9 @@ def user_or_admin_required(fn):
     return wrapper
 
 
-
+# ============================================================================
 # GET - Obtener todos los clientes (requiere autenticación)
+# ============================================================================
 
 @clients_bp.route('', methods=['GET'])
 @user_or_admin_required
@@ -71,8 +73,9 @@ def get_all_clients():
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # GET - Obtener clientes por negocio (requiere autenticación)
+# ============================================================================
 
 @clients_bp.route('/business/<int:business_id>', methods=['GET'])
 @user_or_admin_required
@@ -94,8 +97,9 @@ def get_clients_by_business(business_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # GET - Obtener un cliente por ID (requiere autenticación)
+# ============================================================================
 
 @clients_bp.route('/<int:client_id>', methods=['GET'])
 @user_or_admin_required
@@ -114,8 +118,9 @@ def get_client(client_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # POST - Crear un nuevo cliente (requiere autenticación)
+# ============================================================================
 
 @clients_bp.route('', methods=['POST'])
 @user_or_admin_required
@@ -191,8 +196,9 @@ def create_client():
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # PUT - Actualizar un cliente (requiere autenticación)
+# ============================================================================
 
 @clients_bp.route('/<int:client_id>', methods=['PUT'])
 @user_or_admin_required
@@ -249,8 +255,9 @@ def update_client(client_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # DELETE - Eliminar un cliente (requiere autenticación)
+# ============================================================================
 
 @clients_bp.route('/<int:client_id>', methods=['DELETE'])
 @user_or_admin_required
@@ -275,8 +282,9 @@ def delete_client(client_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # GET - Buscar cliente por email (requiere autenticación)
+# ============================================================================
 
 @clients_bp.route('/search/email', methods=['GET'])
 @user_or_admin_required
@@ -303,8 +311,9 @@ def search_client_by_email():
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # GET - Buscar cliente por ID del cliente (requiere autenticación)
+# ============================================================================
 
 @clients_bp.route('/search/dni', methods=['GET'])
 @user_or_admin_required
@@ -331,8 +340,9 @@ def search_client_by_dni():
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # GET - Obtener estadísticas de un cliente (requiere autenticación)
+# ============================================================================
 
 @clients_bp.route('/<int:client_id>/stats', methods=['GET'])
 @user_or_admin_required
@@ -370,8 +380,9 @@ def get_client_stats(client_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # POST - Añadir nota a cliente (requiere autenticación)
+# ============================================================================
 
 @clients_bp.route('/<int:client_id>/notes', methods=['POST'])
 @user_or_admin_required
@@ -410,8 +421,9 @@ def add_note_to_client(client_id):
         return jsonify({"error": str(e)}), 500
 
 
-
+# ============================================================================
 # GET - Obtener notas de cliente (requiere autenticación)
+# ============================================================================
 
 @clients_bp.route('/<int:client_id>/notes', methods=['GET'])
 @user_or_admin_required

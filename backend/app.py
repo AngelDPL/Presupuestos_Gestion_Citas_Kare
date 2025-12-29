@@ -9,6 +9,11 @@ from routes.admins import admins_bp
 from routes.businesses import businesses_bp
 from routes.users import users_bp
 from routes.clients import clients_bp
+from routes.services import services_bp
+from routes.appointments import appointments_bp
+from routes.payments import payments_bp
+from routes.client_services import client_services_bp
+from routes.calendar import calendar_bp
 
 load_dotenv()
 
@@ -33,6 +38,11 @@ app.register_blueprint(admins_bp)
 app.register_blueprint(businesses_bp)
 app.register_blueprint(users_bp)
 app.register_blueprint(clients_bp)
+app.register_blueprint(services_bp)
+app.register_blueprint(appointments_bp)
+app.register_blueprint(payments_bp)
+app.register_blueprint(client_services_bp)
+app.register_blueprint(calendar_bp)
 
 @app.route('/api/health', methods=['GET'])
 def health():
