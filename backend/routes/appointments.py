@@ -5,7 +5,7 @@ from models import db, Appointments, Users, Clients, Services, Businesses, Admin
 from datetime import datetime, timedelta
 
 # Crear el Blueprint
-appointments_bp = Blueprint('appointments', __name__, url_prefix='/api/appointments')
+appointments_bp = Blueprint('appointments_api', __name__, url_prefix='/api/appointments')
 
 
 # ============================================================================

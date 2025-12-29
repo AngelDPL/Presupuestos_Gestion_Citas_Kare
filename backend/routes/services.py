@@ -5,7 +5,7 @@ from models import db, Services, Businesses, Users, Admins
 from decimal import Decimal
 
 # Crear el Blueprint
-services_bp = Blueprint('services', __name__, url_prefix='/api/services')
+services_bp = Blueprint('services_api', __name__, url_prefix='/api/services')
 
 
 # ============================================================================

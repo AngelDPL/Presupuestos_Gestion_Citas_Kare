@@ -6,7 +6,7 @@ from decimal import Decimal
 from datetime import datetime, date
 
 # Crear el Blueprint
-payments_bp = Blueprint('payments', __name__, url_prefix='/api/payments')
+payments_bp = Blueprint('payments_api', __name__, url_prefix='/api/payments')
 
 
 # ============================================================================

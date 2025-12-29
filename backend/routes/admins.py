@@ -4,7 +4,7 @@ from functools import wraps
 from models import db, Admins
 
 # Crear el Blueprint
-admins_bp = Blueprint('admins', __name__, url_prefix='/api/admins')
+admins_bp = Blueprint('admins_api', __name__, url_prefix='/api/admins')
 
 
 # ============================================================================
