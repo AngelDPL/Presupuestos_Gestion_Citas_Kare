@@ -6,7 +6,7 @@ from datetime import datetime
 import requests
 
 # Crear el Blueprint
-calendar_bp = Blueprint('calendar', __name__, url_prefix='/api/calendar')
+calendar_bp = Blueprint('calendar_api', __name__, url_prefix='/api/calendar')
 
 
 # ============================================================================

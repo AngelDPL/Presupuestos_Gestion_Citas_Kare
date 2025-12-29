@@ -5,7 +5,7 @@ from models import db, ClientService, Clients, Services, Businesses, Users, Admi
 from datetime import datetime
 
 # Crear el Blueprint
-client_services_bp = Blueprint('client_services', __name__, url_prefix='/api/client-services')
+client_services_bp = Blueprint('client_services_api', __name__, url_prefix='/api/client-services')
 
 
 # ============================================================================
