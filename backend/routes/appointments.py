@@ -172,7 +172,7 @@ def get_appointment(appointment_id):
 @user_or_admin_required
 def create_appointment():
     """
-    Crea una nueva cita
+    Crea una nueva cita Y automáticamente crea el evento en el calendario
     POST /api/appointments
     Headers: Authorization: Bearer {token}
     Body (opción 1 - con IDs):
@@ -203,6 +203,8 @@ def create_appointment():
     }
     """
     try:
+        from models import Calendar
+        
         data = request.json
 
         if not data:
@@ -309,9 +311,30 @@ def create_appointment():
         )
 
         db.session.add(nueva_appointment)
+        db.session.flush()  # Obtener el ID sin hacer commit
+
+        # ============================================================
+        # CREAR AUTOMÁTICAMENTE EL EVENTO EN CALENDAR
+        # ============================================================
+        # Calcular duración del evento (1 hora por defecto)
+        event_duration_hours = data.get('duration_hours', 1)
+        end_date_time = date_time.replace(hour=date_time.hour + event_duration_hours)
+
+        nuevo_calendar_event = Calendar(
+            appointment_id=nueva_appointment.id,
+            business_id=data['business_id'],
+            start_date_time=date_time,
+            end_date_time=end_date_time
+        )
+
+        db.session.add(nuevo_calendar_event)
         db.session.commit()
 
-        return jsonify(nueva_appointment.serialize_appointment()), 201
+        return jsonify({
+            "message": "Cita creada y evento de calendario generado automáticamente",
+            "appointment": nueva_appointment.serialize_appointment(),
+            "calendar_event": nuevo_calendar_event.serialize_calendar()
+        }), 201
 
     except Exception as e:
         db.session.rollback()
