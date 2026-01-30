@@ -9,8 +9,20 @@ flask-cors = "*"
 sqlalchemy = "*"
 flask-sqlalchemy = "*"
 python-dotenv = "*"
+flask-jwt-extended = "*"
+requests = "*"
+flask-admin = "*"
+flask-migrate = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.14"
+
+[scripts]
+start = "python app.py"
+dev = "python app.py"
+migrate-init = "flask db init"
+migrate-create = "flask db migrate -m"
+migrate-upgrade = "flask db upgrade"
+migrate-downgrade = "flask db downgrade"
